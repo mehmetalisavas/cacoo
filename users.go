@@ -20,7 +20,7 @@ func (us *UsersService) Get(ctx context.Context, name string) (*User, *Response,
 
 	user := new(User)
 
-	resp, err := us.client.Get(ctx, u, &user)
+	resp, err := us.client.Get(ctx, u, user)
 	if err != nil {
 		return nil, resp, err
 	}

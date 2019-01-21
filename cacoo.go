@@ -9,7 +9,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
 const (
@@ -39,6 +38,7 @@ type Client struct {
 	Diagram *DiagramService
 	Image   *ImageService
 	License *LicenseService
+	Comment *CommentService
 }
 
 // service holds the cacoo client and its services
@@ -69,6 +69,7 @@ func NewClient(token string, opts ...Option) *Client {
 	c.Diagram = (*DiagramService)(&c.service)
 	c.Image = (*ImageService)(&c.service)
 	c.License = (*LicenseService)(&c.service)
+	c.Comment = (*CommentService)(&c.service)
 
 	for _, opt := range opts {
 		opt(c)
@@ -103,10 +104,6 @@ func OptionBaseURL(rawurl string) func(*Client) {
 
 // NewRequest creates the cacoo api request
 func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Request, error) {
-	if !strings.HasSuffix(c.BaseURL.Path, "/") {
-		return nil, fmt.Errorf("needs trailing slash for BaseURL, but %q does not have", c.BaseURL)
-	}
-
 	u, err := c.BaseURL.Parse(urlStr)
 	if err != nil {
 		return nil, err
@@ -242,6 +239,7 @@ func CheckResponse(r *http.Response) error {
 	if c := r.StatusCode; 200 <= c && c <= 299 {
 		return nil
 	}
+
 	errorResponse := &ErrorResponse{Response: r}
 	data, err := ioutil.ReadAll(r.Body)
 	if err == nil && data != nil {

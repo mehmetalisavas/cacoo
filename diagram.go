@@ -130,3 +130,22 @@ func (ds *DiagramService) Delete(ctx context.Context, diagramID string) (*Respon
 
 	return resp, nil
 }
+
+// Editor represents the diagram editor token
+type Editor struct {
+	Token *string `json:"token,omitempty"`
+}
+
+// GetToken fetches the token for given diagram
+func (ds *DiagramService) GetToken(ctx context.Context, diagramID string) (*Editor, *Response, error) {
+	u := fmt.Sprintf("diagrams/%s/editor/token.json", diagramID)
+
+	e := new(Editor)
+
+	resp, err := ds.client.Get(ctx, u, &e)
+	if err != nil {
+		return e, resp, err
+	}
+
+	return e, resp, nil
+}
