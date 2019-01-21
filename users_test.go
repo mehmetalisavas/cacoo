@@ -24,7 +24,7 @@ func TestSpecificUser(t *testing.T) {
 
 	user, _, err := client.Users.Get(context.Background(), "1MUJPfNEEeVUox15")
 	if err != nil {
-		t.Errorf("Users.Get returned error: %v", err)
+		t.Errorf("user.get returned error: %v", err)
 	}
 
 	want := &User{
