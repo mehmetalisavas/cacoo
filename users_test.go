@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"reflect"
 	"testing"
 )
 
@@ -26,22 +27,14 @@ func TestSpecificUser(t *testing.T) {
 		t.Errorf("Users.Get returned error: %v", err)
 	}
 
-	want := &Account{
+	want := &User{
 		ImageURL: String("https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"),
 		Name:     String("1MUJPfNEEeVUox15"),
 		Nickname: String("Yoko"),
 		Type:     String("cacoo"),
 	}
-	if *user.ImageURL != *want.ImageURL {
-		t.Errorf("expected: %v, but got : %v", *want.ImageURL, *user.ImageURL)
-	}
-	if *user.Name != *want.Name {
-		t.Errorf("expected: %v, but got : %v", *want.Name, *user.Name)
-	}
-	if *user.Nickname != *want.Nickname {
-		t.Errorf("expected: %v, but got : %v", *want.Nickname, *user.Nickname)
-	}
-	if *user.Type != *want.Type {
-		t.Errorf("expected: %v, but got : %v", *want.Type, *user.Type)
+
+	if !reflect.DeepEqual(user, want) {
+		t.Errorf("want: %v, but got: %v", want, user)
 	}
 }
