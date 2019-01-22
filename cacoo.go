@@ -30,6 +30,7 @@ type Client struct {
 	// UserAgent holds the agent name while communicating with cacoo api
 	UserAgent string
 
+	// service is used to register all other services
 	service service
 
 	Users   *UsersService
@@ -54,6 +55,11 @@ type Option func(*Client)
 //
 // Second parameter(Options) is used for options of the client initialization.
 // You can specifiy custom settings while creating the client
+//
+// you can initialize client basically;
+// e.g;
+// NewClient("") without token&option
+// NewClient("apiKeyToken") with token
 func NewClient(token string, opts ...Option) *Client {
 	client := http.DefaultClient
 
@@ -79,14 +85,17 @@ func NewClient(token string, opts ...Option) *Client {
 }
 
 // OptionHttpClient provides a client for cacoo cliet
-func OptionHttpClient(httpClient *http.Client) func(*Client) {
+// usage is;
+// NewClient("apikey", OptionHttpClient(yourHttpClient *http.Client))
+func OptionHttpClient(httpClient *http.Client) Option {
 	return func(c *Client) {
 		c.client = httpClient
 	}
 }
 
 // OptionUserAgent provides a user agent description for the cacoo client
-func OptionUserAgent(agent string) func(*Client) {
+// simple usage is; // NewClient("apikey", OptionUserAgent("custom user agent"))
+func OptionUserAgent(agent string) Option {
 	return func(c *Client) {
 		c.UserAgent = agent
 	}
@@ -95,7 +104,7 @@ func OptionUserAgent(agent string) func(*Client) {
 // OptionBaseURL provides a specific url for the client. It's better to be
 // careful while using this option. It's also useful for writing tests for the
 // client, so you can modify your client endpoint
-func OptionBaseURL(rawurl string) func(*Client) {
+func OptionBaseURL(rawurl string) Option {
 	return func(c *Client) {
 		u, _ := url.Parse(rawurl)
 		c.BaseURL = u
@@ -141,10 +150,13 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	return req, nil
 }
 
+// Response represents the response struct of cacoo client
 type Response struct {
 	*http.Response
 }
 
+// ErrorResponse represent the returning error struct.
+// Implements the error interface
 type ErrorResponse struct {
 	Response *http.Response
 	Code     int    `json:"code"`
@@ -158,9 +170,12 @@ func (r *ErrorResponse) Error() string {
 		r.Response.StatusCode, r.Message, r.Content)
 }
 
+// Get used for GET methods of cacoo client
 func (c *Client) Get(ctx context.Context, url string, v interface{}) (*Response, error) {
 	return c.send(ctx, "GET", url, nil, v)
 }
+
+// Post used for POST methods of cacoo client
 func (c *Client) Post(ctx context.Context, url string, body, v interface{}) (*Response, error) {
 	return c.send(ctx, "POST", url, body, v)
 }
@@ -178,6 +193,10 @@ func (c *Client) send(ctx context.Context, method string, url string, body inter
 	return resp, nil
 }
 
+// Do sends the requests and returns the cacoo api response.  If there is an
+// error while doing request then it returns error, and sanitizes the url if
+// necessary  if v implements the writer interface then it copies the body to
+// the given parameter v. Otwerwise just decodes the incoming data into the v
 func (c *Client) Do(ctx context.Context, req *http.Request, v interface{}) (*Response, error) {
 	req = req.WithContext(ctx)
 
