@@ -67,55 +67,55 @@ func TestDiagramGetDiagram(t *testing.T) {
 	mux.HandleFunc("/diagrams/00e77f4dc9973517.json", func(w http.ResponseWriter, r *http.Request) {
 		method(t, r, "GET")
 		fmt.Fprint(w, `{
-    "url": "https://cacoo.com/diagrams/00e77f4dc9973517",
-    "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517.png",
-    "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517.png",
-    "diagramId": "00e77f4dc9973517",
-    "title": "Wireframe",
-    "description": "Current project wireframe",
-    "security": "url",
-    "type": "normal",
-    "ownerName": "1MUJPfNEEeVUox15",
-    "ownerNickname": "Yoko",
-    "owner": {
-        "name": "1MUJPfNEEeVUox15",
-        "nickname": "Yoko",
-        "type": "cacoo",
-        "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
-    },
-    "editing": true,
-    "own": true,
-    "shared": false,
-    "folderId": 10001,
-    "folderName": "Design",
-    "sheetCount": 3,
-    "created": "Mon, 10 Aug 2009 17:00:00 +0900",
-    "updated": "Mon, 10 Aug 2009 17:00:00 +0900",
-    "sheets": [
-        {
-            "url": "https://cacoo.com/diagrams/00e77f4dc9973517#aaaa",
-            "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517-aaaa.png",
-            "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517-aaaa.png",
-            "uid": "aaaa",
-            "name": "sheet1",
-            "width": 200,
-            "height": 100
-        }
-    ],
-    "comments": [
-        {
-            "user": {
-                "name": "1MUJPfNEEeVUox15",
-                "nickname": "Yoko",
-                "type": "cacoo",
-                "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
-            },
-            "content": "comment 1",
-            "created": "Mon, 10 Aug 2009 17:00:00 +0900",
-            "updated": "Mon, 10 Aug 2009 17:00:00 +0900"
-        }
-    ]
-}`)
+		    "url": "https://cacoo.com/diagrams/00e77f4dc9973517",
+		    "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517.png",
+		    "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517.png",
+		    "diagramId": "00e77f4dc9973517",
+		    "title": "Wireframe",
+		    "description": "Current project wireframe",
+		    "security": "url",
+		    "type": "normal",
+		    "ownerName": "1MUJPfNEEeVUox15",
+		    "ownerNickname": "Yoko",
+		    "owner": {
+		        "name": "1MUJPfNEEeVUox15",
+		        "nickname": "Yoko",
+		        "type": "cacoo",
+		        "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
+		    },
+		    "editing": true,
+		    "own": true,
+		    "shared": false,
+		    "folderId": 10001,
+		    "folderName": "Design",
+		    "sheetCount": 3,
+		    "created": "Mon, 10 Aug 2009 17:00:00 +0900",
+		    "updated": "Mon, 10 Aug 2009 17:00:00 +0900",
+		    "sheets": [
+		        {
+		            "url": "https://cacoo.com/diagrams/00e77f4dc9973517#aaaa",
+		            "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517-aaaa.png",
+		            "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517-aaaa.png",
+		            "uid": "aaaa",
+		            "name": "sheet1",
+		            "width": 200,
+		            "height": 100
+		        }
+		    ],
+		    "comments": [
+		        {
+		            "user": {
+		                "name": "1MUJPfNEEeVUox15",
+		                "nickname": "Yoko",
+		                "type": "cacoo",
+		                "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
+		            },
+		            "content": "comment 1",
+		            "created": "Mon, 10 Aug 2009 17:00:00 +0900",
+		            "updated": "Mon, 10 Aug 2009 17:00:00 +0900"
+		        }
+		    ]
+		}`)
 	})
 
 	diagram, _, err := client.Diagram.GetDiagram(context.Background(), "00e77f4dc9973517")
@@ -137,55 +137,55 @@ func TestDiagramCreate(t *testing.T) {
 	mux.HandleFunc("/diagrams/create.json", func(w http.ResponseWriter, r *http.Request) {
 		method(t, r, "POST")
 		fmt.Fprint(w, `{
-    "url": "https://cacoo.com/diagrams/00e77f4dc9973517",
-    "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517.png",
-    "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517.png",
-    "diagramId": "00e77f4dc9973517",
-    "title": "Wireframe",
-    "description": "Current project wireframe",
-    "security": "url",
-    "type": "normal",
-    "ownerName": "1MUJPfNEEeVUox15",
-    "ownerNickname": "Yoko",
-    "owner": {
-        "name": "1MUJPfNEEeVUox15",
-        "nickname": "Yoko",
-        "type": "cacoo",
-        "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
-    },
-    "editing": true,
-    "own": true,
-    "shared": false,
-    "folderId": 10001,
-    "folderName": "Design",
-    "sheetCount": 3,
-    "created": "Mon, 10 Aug 2009 17:00:00 +0900",
-    "updated": "Mon, 10 Aug 2009 17:00:00 +0900",
-    "sheets": [
-        {
-            "url": "https://cacoo.com/diagrams/00e77f4dc9973517#aaaa",
-            "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517-aaaa.png",
-            "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517-aaaa.png",
-            "uid": "aaaa",
-            "name": "sheet1",
-            "width": 200,
-            "height": 100
-        }
-    ],
-    "comments": [
-        {
-            "user": {
-                "name": "1MUJPfNEEeVUox15",
-                "nickname": "Yoko",
-                "type": "cacoo",
-                "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
-            },
-            "content": "comment 1",
-            "created": "Mon, 10 Aug 2009 17:00:00 +0900",
-            "updated": "Mon, 10 Aug 2009 17:00:00 +0900"
-        }
-    ]
-}`)
+		    "url": "https://cacoo.com/diagrams/00e77f4dc9973517",
+		    "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517.png",
+		    "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517.png",
+		    "diagramId": "00e77f4dc9973517",
+		    "title": "Wireframe",
+		    "description": "Current project wireframe",
+		    "security": "url",
+		    "type": "normal",
+		    "ownerName": "1MUJPfNEEeVUox15",
+		    "ownerNickname": "Yoko",
+		    "owner": {
+		        "name": "1MUJPfNEEeVUox15",
+		        "nickname": "Yoko",
+		        "type": "cacoo",
+		        "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
+		    },
+		    "editing": true,
+		    "own": true,
+		    "shared": false,
+		    "folderId": 10001,
+		    "folderName": "Design",
+		    "sheetCount": 3,
+		    "created": "Mon, 10 Aug 2009 17:00:00 +0900",
+		    "updated": "Mon, 10 Aug 2009 17:00:00 +0900",
+		    "sheets": [
+		        {
+		            "url": "https://cacoo.com/diagrams/00e77f4dc9973517#aaaa",
+		            "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517-aaaa.png",
+		            "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517-aaaa.png",
+		            "uid": "aaaa",
+		            "name": "sheet1",
+		            "width": 200,
+		            "height": 100
+		        }
+		    ],
+		    "comments": [
+		        {
+		            "user": {
+		                "name": "1MUJPfNEEeVUox15",
+		                "nickname": "Yoko",
+		                "type": "cacoo",
+		                "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
+		            },
+		            "content": "comment 1",
+		            "created": "Mon, 10 Aug 2009 17:00:00 +0900",
+		            "updated": "Mon, 10 Aug 2009 17:00:00 +0900"
+		        }
+		    ]
+		}`)
 	})
 
 	generatedDiagram := testGenerateDiagramOption(t)
@@ -208,55 +208,55 @@ func TestDiagramGet(t *testing.T) {
 	mux.HandleFunc("/diagrams/create.json", func(w http.ResponseWriter, r *http.Request) {
 		method(t, r, "GET")
 		fmt.Fprint(w, `{
-    "url": "https://cacoo.com/diagrams/00e77f4dc9973517",
-    "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517.png",
-    "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517.png",
-    "diagramId": "00e77f4dc9973517",
-    "title": "Wireframe",
-    "description": "Current project wireframe",
-    "security": "url",
-    "type": "normal",
-    "ownerName": "1MUJPfNEEeVUox15",
-    "ownerNickname": "Yoko",
-    "owner": {
-        "name": "1MUJPfNEEeVUox15",
-        "nickname": "Yoko",
-        "type": "cacoo",
-        "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
-    },
-    "editing": true,
-    "own": true,
-    "shared": false,
-    "folderId": 10001,
-    "folderName": "Design",
-    "sheetCount": 3,
-    "created": "Mon, 10 Aug 2009 17:00:00 +0900",
-    "updated": "Mon, 10 Aug 2009 17:00:00 +0900",
-    "sheets": [
-        {
-            "url": "https://cacoo.com/diagrams/00e77f4dc9973517#aaaa",
-            "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517-aaaa.png",
-            "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517-aaaa.png",
-            "uid": "aaaa",
-            "name": "sheet1",
-            "width": 200,
-            "height": 100
-        }
-    ],
-    "comments": [
-        {
-            "user": {
-                "name": "1MUJPfNEEeVUox15",
-                "nickname": "Yoko",
-                "type": "cacoo",
-                "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
-            },
-            "content": "comment 1",
-            "created": "Mon, 10 Aug 2009 17:00:00 +0900",
-            "updated": "Mon, 10 Aug 2009 17:00:00 +0900"
-        }
-    ]
-}`)
+		    "url": "https://cacoo.com/diagrams/00e77f4dc9973517",
+		    "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517.png",
+		    "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517.png",
+		    "diagramId": "00e77f4dc9973517",
+		    "title": "Wireframe",
+		    "description": "Current project wireframe",
+		    "security": "url",
+		    "type": "normal",
+		    "ownerName": "1MUJPfNEEeVUox15",
+		    "ownerNickname": "Yoko",
+		    "owner": {
+		        "name": "1MUJPfNEEeVUox15",
+		        "nickname": "Yoko",
+		        "type": "cacoo",
+		        "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
+		    },
+		    "editing": true,
+		    "own": true,
+		    "shared": false,
+		    "folderId": 10001,
+		    "folderName": "Design",
+		    "sheetCount": 3,
+		    "created": "Mon, 10 Aug 2009 17:00:00 +0900",
+		    "updated": "Mon, 10 Aug 2009 17:00:00 +0900",
+		    "sheets": [
+		        {
+		            "url": "https://cacoo.com/diagrams/00e77f4dc9973517#aaaa",
+		            "imageUrl": "https://cacoo.com/diagrams/00e77f4dc9973517-aaaa.png",
+		            "imageUrlForApi": "https://cacoo.com/api/v1/diagrams/00e77f4dc9973517-aaaa.png",
+		            "uid": "aaaa",
+		            "name": "sheet1",
+		            "width": 200,
+		            "height": 100
+		        }
+		    ],
+		    "comments": [
+		        {
+		            "user": {
+		                "name": "1MUJPfNEEeVUox15",
+		                "nickname": "Yoko",
+		                "type": "cacoo",
+		                "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
+		            },
+		            "content": "comment 1",
+		            "created": "Mon, 10 Aug 2009 17:00:00 +0900",
+		            "updated": "Mon, 10 Aug 2009 17:00:00 +0900"
+		        }
+		    ]
+		}`)
 	})
 
 	diagram, _, err := client.Diagram.Get(context.Background())
