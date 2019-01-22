@@ -3,23 +3,35 @@ package cacoo
 import (
 	"context"
 	"fmt"
+	"net/http"
+	"reflect"
 	"testing"
-
-	"github.com/bookerzzz/grok"
 )
 
 const TestToken = "123456789qwert"
 
-func TestAccount(t *testing.T) {
-	client := NewClient(TestToken)
-	// client := NewClient("")
+func TestMyAccountInformation(t *testing.T) {
+	client, mux, _, teardown := setup()
+	defer teardown()
 
-	ctx := context.Background()
-	account, resp, err := client.Account.MyAccountInformation(ctx)
+	mux.HandleFunc("/account.json", func(w http.ResponseWriter, r *http.Request) {
+		method(t, r, "GET")
+		fmt.Fprint(w, `{
+	    "name": "1MUJPfNEEeVUox15",
+	    "nickname": "Yoko",
+	    "type": "cacoo",
+    	"imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
+		}`)
+	})
+
+	account, _, err := client.Account.MyAccountInformation(context.Background())
 	if err != nil {
-		fmt.Printf("Err is %+v:", err)
+		t.Errorf("account.myaccountinformation has error: %v", err)
 	}
 
-	grok.V(account)
-	fmt.Println("resp is:", resp)
+	want := testAccount()
+
+	if !reflect.DeepEqual(account, want) {
+		t.Errorf("want: %v, but got: %v", want, account)
+	}
 }
