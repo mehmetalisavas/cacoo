@@ -3,26 +3,43 @@ package cacoo
 import (
 	"context"
 	"fmt"
+	"net/http"
+	"reflect"
 	"testing"
-
-	"github.com/bookerzzz/grok"
 )
 
 func TestCommentPost(t *testing.T) {
-	c := NewClient(TestToken)
-	// c := NewClient("asd")
+	client, mux, _, teardown := setup()
+	defer teardown()
+
+	mux.HandleFunc("/diagrams/1MUJPfNEEeVUox15/comments/post.json", func(w http.ResponseWriter, r *http.Request) {
+		method(t, r, "POST")
+		fmt.Fprint(w, `{
+		    "user": {
+		        "name": "1MUJPfNEEeVUox15",
+		        "nickname": "Yoko",
+		        "type": "cacoo",
+		        "imageUrl": "https://cacoo.com/account/1MUJPfNEEeVUox15/image/32x32"
+		    },
+		    "content": "comment 1",
+		    "created": "Mon, 10 Aug 2009 17:00:00 +0900",
+		    "updated": "Mon, 10 Aug 2009 17:00:00 +0900"
+		}`)
+	})
 
 	opt := &CommentOption{
-		Name: "Comment information - test - cacoo",
+		Name: "Comment information",
 	}
 
-	// comment, _, err := c.Comment.Post(context.Background(), "rkzgn5jGe2asBRCQ", opt)
-	comment, _, err := c.Comment.Post(context.Background(), "dFevldI74IS92lpr", opt)
+	comment, _, err := client.Comment.Post(context.Background(), "1MUJPfNEEeVUox15", opt)
 	if err != nil {
-		fmt.Println("err is:", err)
+		t.Errorf("comment.post has error: %v", err)
 	}
 
-	grok.V(comment)
-	fmt.Println(comment)
-	_ = comment
+	c := testComment(t)
+	want := &c
+
+	if !reflect.DeepEqual(comment, want) {
+		t.Errorf("want: %v, but got: %v", want, comment)
+	}
 }

@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// dateFormat represents the RFC2822 format for custom unmarshal functions.
+// dateFormat represents the RFC2822 format for custom unmarshal function.
 const dateFormat = "Mon, 02 Jan 2006 15:04:05 -0700"
 
 // CacooTime is used to parse default cacoo time (RFC2822). Unmarshal or Decode
