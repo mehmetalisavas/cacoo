@@ -5,10 +5,10 @@ import (
 	"fmt"
 )
 
-// LicenseService handles licence related methods
+// LicenseService handles license related methods
 type LicenseService service
 
-// License represents the information about account licence
+// License represents the information about account license
 type License struct {
 	CanCreateSharedFolder             *bool   `json:"canCreateSharedFolder,omitempty"`
 	CanCreateSheet                    *bool   `json:"canCreateSheet,omitempty"`
@@ -20,7 +20,7 @@ type License struct {
 	RemainingSheets                   *int    `json:"remainingSheets,omitempty"`
 }
 
-// GetLicense gives information about the account licence
+// GetLicense gives information about the account license
 func (ls *LicenseService) GetLicense(ctx context.Context) (*License, *Response, error) {
 	u := fmt.Sprintf("%s", "account/license.json")
 
