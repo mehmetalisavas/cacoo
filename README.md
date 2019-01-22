@@ -33,11 +33,12 @@ client := NewClient("your token")
 
 // you can fetch your account information with this
 account, _, err := client.Account.MyAccountInformation(context.Background())
+if err != nil {
+    // handle error
+}
 
-// If you want to use account name, you can get it like this after using above method
-myName := account.Name
-
-
+myName := account.Name // you can use account name after using above method
+myName := account.Nickname // you can reach nickname as well like this
 
 Granted Client options are listed below:
 - func OptionHttpClient(*http.Client) Option
