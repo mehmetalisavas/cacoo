@@ -291,6 +291,24 @@ func TestDiagramDelete(t *testing.T) {
 		t.Errorf("status code should equal to %d, but got: %d", http.StatusOK, resp.StatusCode)
 	}
 }
+func TestDiagramDeleteWithWrongID(t *testing.T) {
+	client, mux, _, teardown := setup()
+	defer teardown()
+
+	mux.HandleFunc("/diagrams/00e77f4dc9973517/delete.json", func(w http.ResponseWriter, r *http.Request) {
+		method(t, r, "GET")
+		fmt.Fprint(w, `{}`)
+	})
+
+	resp, err := client.Diagram.Delete(context.Background(), "12345")
+	if err == nil {
+		t.Error("error should not be nil")
+	}
+
+	if resp.StatusCode != 404 {
+		t.Errorf("response code should be:%d, but got:%d", 404, resp.StatusCode)
+	}
+}
 
 func TestDiagramGetToken(t *testing.T) {
 	client, mux, _, teardown := setup()
@@ -313,6 +331,27 @@ func TestDiagramGetToken(t *testing.T) {
 	if !reflect.DeepEqual(token, want) {
 		t.Errorf("want: %v, but got: %v", want, token)
 	}
+}
+func TestDiagramGetTokenWithWrongID(t *testing.T) {
+	client, mux, _, teardown := setup()
+	defer teardown()
+
+	mux.HandleFunc("/diagrams/00e77f4dc9973517/editor/token.json", func(w http.ResponseWriter, r *http.Request) {
+		method(t, r, "GET")
+		fmt.Fprint(w, `{
+		    "token": "nITfHr0rxfeAxdCn"
+		}`)
+	})
+
+	token, _, err := client.Diagram.GetToken(context.Background(), "12345600e77f4dc97")
+	if err == nil {
+		t.Error("error should not be nil", err)
+	}
+
+	if token != nil {
+		t.Errorf("token should be nil, but got: %v", token)
+	}
+
 }
 
 func testAccount() *Account {

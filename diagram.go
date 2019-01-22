@@ -144,7 +144,7 @@ func (ds *DiagramService) GetToken(ctx context.Context, diagramID string) (*Edit
 
 	resp, err := ds.client.Get(ctx, u, &e)
 	if err != nil {
-		return e, resp, err
+		return nil, resp, err
 	}
 
 	return e, resp, nil

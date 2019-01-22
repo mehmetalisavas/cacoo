@@ -53,3 +53,30 @@ func TestDiagramImage(t *testing.T) {
 		t.Errorf("sizes should be the same; but file stats: %d , downloaded file stats: %d", fs.Size(), dfs.Size())
 	}
 }
+func TestDiagramImageWithNonExistingImage(t *testing.T) {
+	client, mux, _, teardown := setup()
+	defer teardown()
+
+	file, err := os.Open("testdata/cacoo_test.png")
+	if err != nil {
+		t.Errorf("image not found, image should exists as: %s", "cacoo_test.png")
+	}
+	defer file.Close()
+
+	mux.HandleFunc("/diagrams/00e77f4dc9973517.png", func(w http.ResponseWriter, r *http.Request) {
+		method(t, r, "GET")
+		fmt.Fprint(w)
+		io.Copy(w, file)
+	})
+
+	// try to download under the wrong filepath
+	filePath := "wrongtestdata/00e77f4dc9973517.png"
+	resp, err := client.Image.DownloadDiagram(context.Background(), "00e77f4dc9973517", filePath)
+	if err == nil {
+		t.Error("error should not be nil")
+	}
+
+	if resp != nil {
+		t.Errorf("response should be nil, but got: %v", resp)
+	}
+}
