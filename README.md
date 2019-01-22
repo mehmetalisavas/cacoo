@@ -1,6 +1,6 @@
 # wercker status
 
-[![wercker status](https://app.wercker.com/status/52664147f077abcb9657ac9831ec0211/s/master "wercker status")](https://app.wercker.com/project/byKey/52664147f077abcb9657ac9831ec0211)[![codecov](https://codecov.io/gh/mehmetalisavas/cacoo/branch/master/graph/badge.svg)](https://codecov.io/gh/mehmetalisavas/cacoo)
+[![wercker status](https://app.wercker.com/status/52664147f077abcb9657ac9831ec0211/s/master "wercker status")](https://app.wercker.com/project/byKey/52664147f077abcb9657ac9831ec0211) [![codecov](https://codecov.io/gh/mehmetalisavas/cacoo/branch/master/graph/badge.svg)](https://codecov.io/gh/mehmetalisavas/cacoo)
 
 
 
@@ -11,7 +11,7 @@
 
 you can use `go get`
 ```bash
-go get github.com/mehmetalisavas/mongo-cache
+go get github.com/mehmetalisavas/cacoo
 ```
 
 or you can clone into specific path with `git clone`
