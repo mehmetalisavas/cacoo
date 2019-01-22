@@ -10,10 +10,10 @@ import (
 type ImageService service
 
 // DownloadDiagram fetches the image with given diagram id
-func (as *ImageService) DownloadDiagram(ctx context.Context, diagramID string) (*Response, error) {
+func (as *ImageService) DownloadDiagram(ctx context.Context, diagramID string, filePath string) (*Response, error) {
 
 	u := fmt.Sprintf("diagrams/%s.png", diagramID)
-	diagramFile := fmt.Sprintf("%s.png", diagramID)
+	diagramFile := fmt.Sprintf("%s", filePath)
 
 	// if there is and error on http level, remove created file
 	var err error
