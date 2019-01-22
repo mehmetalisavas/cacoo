@@ -15,11 +15,11 @@ type Folder struct {
 
 // FolderResult represents the list of the folder information
 type FolderResult struct {
-	Created    CacooTime `json:"created"`
-	FolderID   int       `json:"folderId"`
-	FolderName string    `json:"folderName"`
-	Type       string    `json:"type"`
-	Updated    CacooTime `json:"updated"`
+	Created    *CacooTime `json:"created"`
+	FolderID   *int       `json:"folderId"`
+	FolderName *string    `json:"folderName"`
+	Type       *string    `json:"type"`
+	Updated    *CacooTime `json:"updated"`
 }
 
 // MyFolders returns the folder list of the authenticated user

@@ -3,22 +3,55 @@ package cacoo
 import (
 	"context"
 	"fmt"
+	"net/http"
+	"reflect"
 	"testing"
-
-	"github.com/bookerzzz/grok"
 )
 
-func TestFolder(t *testing.T) {
-	c := NewClient(TestToken)
-	// c := NewClient("asd")
-	folders, _, err := c.Folders.MyFolders(context.Background())
+func TestMyFolders(t *testing.T) {
+	client, mux, _, teardown := setup()
+	defer teardown()
+
+	mux.HandleFunc("/folders.json", func(w http.ResponseWriter, r *http.Request) {
+		method(t, r, "GET")
+		fmt.Fprint(w, `{
+		    "result": [
+		        {
+		            "folderId": 10001,
+		            "folderName": "Folder 1",
+		            "type": "normal",
+		            "created": "Mon, 10 Aug 2009 17:00:00 +0900",
+		            "updated": "Mon, 10 Aug 2009 17:00:00 +0900"
+		        }
+				]
+		}`)
+	})
+
+	folders, _, err := client.Folders.MyFolders(context.Background())
 	if err != nil {
-		fmt.Println("err is:", err)
+		t.Errorf("folders.myfolders has error: %v :", err)
 	}
 
-	fmt.Println(folders)
-	fmt.Println("folder id is:", folders.Results[0].FolderID)
-	fmt.Println("folder id is:", folders.Results[0])
-	grok.V(folders)
-	_ = folders
+	want := testFolder(t)
+
+	if !reflect.DeepEqual(folders, want) {
+		t.Errorf("want: %v, but got: %v", want, folders)
+	}
+}
+
+func testFolder(t *testing.T) *Folder {
+	f := &Folder{}
+	f.Results = append(f.Results, testFolderResult(t))
+
+	return f
+}
+
+func testFolderResult(t *testing.T) FolderResult {
+	return FolderResult{
+		FolderID:   Int(10001),
+		FolderName: String("Folder 1"),
+		Type:       String("normal"),
+		Created:    testTime(t),
+		Updated:    testTime(t),
+	}
 }
