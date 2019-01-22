@@ -43,3 +43,10 @@ build:
         name: go test
         code: |
           make test
+
+    # Test coverage the project
+    - script:
+        name: go test coverage
+        code: |
+          go test -race -coverprofile=coverage.txt -covermode=atomic
+          bash <(curl -s https://codecov.io/bash)
