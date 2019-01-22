@@ -10,7 +10,7 @@ type DiagramService service
 
 // Diagrams respresents the information about diagram list
 type Diagrams struct {
-	Count  int             `json:"count,omitempty"`
+	Count  *int            `json:"count,omitempty"`
 	Result []DiagramResult `json:"result,omitempty"`
 }
 
@@ -70,8 +70,8 @@ func (ds *DiagramService) ListDiagrams(ctx context.Context) (*Diagrams, *Respons
 }
 
 // GetDiagram fetches information about the given diagram name
-func (ds *DiagramService) GetDiagram(ctx context.Context, name string) (*DiagramResult, *Response, error) {
-	u := fmt.Sprintf("diagrams/%s.json", name)
+func (ds *DiagramService) GetDiagram(ctx context.Context, id string) (*DiagramResult, *Response, error) {
+	u := fmt.Sprintf("diagrams/%s.json", id)
 
 	d := new(DiagramResult)
 
