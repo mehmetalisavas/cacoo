@@ -23,7 +23,7 @@ git clone git@github.com:mehmetalisavas/cacoo.git
 This package implements the Cacoo api, It's written in golang.
 No recommended version is specified for this package. But also, still better to use latest version of go if posssible.
 If there is a misunderstanding points you can check the test cases.
-If you find bug or missing points, feel free to open a pull request. If you won't be able to do that, then please feel free to open an issue in repo.
+If you find bug or missing points, feel free to open a pull request. If you won't be able to do that, then please feel free to open an issue in repo (please use label when you open any issue on github; basically 'bug', 'enhancement' and 'question' would be enough to keep it simple).
 
 ## Usage
 
