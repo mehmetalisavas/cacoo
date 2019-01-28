@@ -9,7 +9,7 @@
 
 ## Install
 
-you can use `go get`
+You can use `go get`
 ```bash
 go get github.com/mehmetalisavas/cacoo
 ```
@@ -38,11 +38,12 @@ if err != nil {
 }
 
 myName := account.Name // you can use account name after using above method
-myName := account.Nickname // you can reach nickname as well like this
+myNickName := account.Nickname // you can reach nickname as well like this
 
 Granted Client options are listed below:
 - func OptionHttpClient(*http.Client) Option
 - func OptionUserAgent(agent string) Option // use custom user agent
 - func OptionBaseURL(url string) Option // sets the custom url for client
 
+// TODO: // Token is also might be added with Option
 ```
