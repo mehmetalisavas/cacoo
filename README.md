@@ -28,13 +28,15 @@ If you find bug or missing points, feel free to open a pull request. If you won'
 ## Usage
 
 ```go
-// you can create client with token or without token(you won't be able to use many methods that requires api key)
+// you can create client with token or without token
+// (you won't be able to use many methods that requires api key)
 client := NewClient("your token")
 
 // you can fetch your account information with this
 account, _, err := client.Account.MyAccountInformation(context.Background())
 if err != nil {
-    // handle error
+   // handle error
+   return err
 }
 
 myName := account.Name // you can use account name after using above method
@@ -45,5 +47,5 @@ Granted Client options are listed below:
 - func OptionUserAgent(agent string) Option // use custom user agent
 - func OptionBaseURL(url string) Option // sets the custom url for client
 
-// TODO: // Token is also might be added with Option
+// TODO: // Token is also might be added via Option
 ```
