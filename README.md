@@ -47,5 +47,5 @@ Granted Client options are listed below:
 - func OptionUserAgent(agent string) Option // use custom user agent
 - func OptionBaseURL(url string) Option // sets the custom url for client
 
-// TODO: // Token is also might be added via Option
+// TODO: Token also might be added via Option
 ```
